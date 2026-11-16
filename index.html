@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ma Cave</title>
+<meta name="description" content="Gestion personnelle de cave à vin">
+<meta name="theme-color" content="#5a1626">
+<meta name="mobile-web-app-capable" content="yes">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header id="topbar">
+  <button id="back" class="icon-btn" data-act="retour" aria-label="Retour" hidden>
+    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>
+  </button>
+  <h1 id="titre">Ma Cave</h1>
+  <a id="cloche" class="icon-btn" href="#/alertes" aria-label="Alertes">
+    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9a6 6 0 0112 0c0 6 2.5 7 2.5 7h-17S6 15 6 9z"/><path d="M10 20a2 2 0 004 0"/></svg>
+    <span id="cloche-n" hidden></span>
+  </a>
+</header>
+
+<main id="view" tabindex="-1"></main>
+
+<button id="fab" data-act="ajouter">+ Ajouter une bouteille</button>
+
+<nav id="tabs" aria-label="Navigation principale">
+  <a href="#/tableau" data-tab="tableau"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M5 20V11M12 20V4M19 20v-6"/></svg><span>Tableau</span></a>
+  <a href="#/cave" data-tab="cave"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M10 2h4v5l2 3v11a1 1 0 01-1 1H9a1 1 0 01-1-1V10l2-3z"/><path d="M8 13h8"/></svg><span>Cave</span></a>
+  <a href="#/garde" data-tab="garde"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span>Garde</span></a>
+  <a href="#/watchlist" data-tab="watchlist"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 3l2.7 5.6 6.1.8-4.5 4.2 1.2 6-5.5-3-5.5 3 1.2-6L3.2 9.4l6.1-.8z"/></svg><span>Watchlist</span></a>
+  <a href="#/plus" data-tab="plus"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="19" cy="12" r="1.8"/></svg><span>Plus</span></a>
+</nav>
+
+<div id="sheet" hidden></div>
+<div id="toast" role="status" aria-live="polite"></div>
+
+<script src="app.js"></script>
+<script src="sync.js"></script>
+</body>
+</html>
