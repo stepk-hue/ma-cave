@@ -3,11 +3,11 @@
    Ma Cave — application personnelle de gestion de cave (PWA hors ligne)
    Données : IndexedDB sur l'appareil. Aucune donnée n'est envoyée ailleurs.
    ===================================================================== */
-const VERSION = '1.1.1';
+const VERSION = '1.1.2';
 
 /* ---------- Constantes ---------- */
 const COULEURS = ['Rouge', 'Blanc', 'Rosé', 'Effervescent', 'Liquoreux', 'Muté', 'Orange', 'Autre'];
-const FORMATS = [[37.5, 'Demi-bouteille 37,5 cl'], [50, '50 cl'], [75, 'Bouteille 75 cl'], [150, 'Magnum 150 cl'], [300, 'Double magnum 300 cl'], [600, 'Impériale 600 cl']];
+const FORMATS = [[37.5, 'Demi-bouteille 37,5 cl'], [50, '50 cl'], [62, 'Clavelin 62 cl'], [75, 'Bouteille 75 cl'], [150, 'Magnum 150 cl'], [300, 'Double magnum 300 cl'], [600, 'Impériale 600 cl']];
 const MOTIFS = { consomme: 'Consommée', offert: 'Offerte', vendu: 'Vendue', perte: 'Cassée ou perdue' };
 const TYPES_COTE = { marchand: 'Prix affiché par un marchand', transaction: 'Transaction constatée', nette: 'Valeur nette de revente estimée' };
 const FIAB = { faible: 'Faible', moyenne: 'Moyenne', elevee: 'Élevée' };
