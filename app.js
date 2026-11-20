@@ -3,7 +3,7 @@
    Ma Cave — application personnelle de gestion de cave (PWA hors ligne)
    Données : IndexedDB sur l'appareil. Aucune donnée n'est envoyée ailleurs.
    ===================================================================== */
-const VERSION = '1.1.0';
+const VERSION = '1.1.1';
 
 /* ---------- Constantes ---------- */
 const COULEURS = ['Rouge', 'Blanc', 'Rosé', 'Effervescent', 'Liquoreux', 'Muté', 'Orange', 'Autre'];
@@ -630,6 +630,7 @@ const CHAMPS_IMPORT = [
   ['debut', 'Début de fenêtre (année)', ['debut', 'boire a partir de', 'drink from']],
   ['apogee', 'Apogée (année)', ['apogee', 'peak']],
   ['fin', 'Fin de garde (année)', ['fin de garde', 'fin', 'boire avant', 'drink until']],
+  ['controle', 'À vérifier (contrôle)', ['controle', 'a verifier', 'verification', 'check']],
   ['notes', 'Notes', ['notes', 'note', 'commentaire', 'commentaires', 'remarques']]
 ];
 const GENERIQUES = new Set(['nom', 'vin', 'wine', 'name', 'type', 'date', 'fin', 'debut', 'nb', 'pu', 'note', 'etat', 'bin', 'size', 'stock']);
@@ -1003,15 +1004,17 @@ function lignesImport() {
   const I = UI.imp, g = (l, k) => I.map[k] ? l[I.map[k]] : '';
   const out = []; let ignorees = 0;
   for (const l of I.lignes) {
-    const prod = String(g(l, 'producteur')).trim(), cuvee = String(g(l, 'cuvee')).trim();
+    const prod = String(g(l, 'producteur')).trim(); let cuvee = String(g(l, 'cuvee')).trim();
     if (!prod && !cuvee) { ignorees++; continue; }
     const q = I.map.quantite ? int(g(l, 'quantite')) : 1;
     if (!q || q < 1) { ignorees++; continue; }
     const mi = int(g(l, 'millesime'));
+    if (mi && cuvee === String(mi)) cuvee = ''; // cuvée = simple répétition du millésime
+    const ctl = String(g(l, 'controle')).trim(), nt = String(g(l, 'notes')).trim();
     out.push({
       idn: { producteur: prod || cuvee, cuvee: prod ? cuvee : '', millesime: mi && mi > 1700 && mi < 2200 ? mi : null, couleur: parseCouleur(g(l, 'couleur')), format: parseFormat(g(l, 'format'), cuvee + ' ' + prod), pays: String(g(l, 'pays')).trim(), region: String(g(l, 'region')).trim(), appellation: String(g(l, 'appellation')).trim(), cepages: String(g(l, 'cepages')).trim() },
       q, emplacement: String(g(l, 'emplacement')).trim(), date: parseDate(g(l, 'dateAchat')), vendeur: String(g(l, 'vendeur')).trim(), prix: num(g(l, 'prix')), frais: num(g(l, 'frais')) || 0,
-      statut: /command|order/.test(norm(g(l, 'statut'))) ? 'commande' : 'en_cave', debut: int(g(l, 'debut')), apogee: int(g(l, 'apogee')), fin: int(g(l, 'fin')), notes: String(g(l, 'notes')).trim()
+      statut: /command|order/.test(norm(g(l, 'statut'))) ? 'commande' : 'en_cave', debut: int(g(l, 'debut')), apogee: int(g(l, 'apogee')), fin: int(g(l, 'fin')), notes: ctl ? 'À vérifier' + (nt ? ' — ' + nt : '') : nt
     });
   }
   return { out, ignorees };

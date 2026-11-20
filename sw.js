@@ -1,6 +1,6 @@
 /* Service worker de Ma Cave : met l'application en cache pour un usage hors ligne.
    Pour publier une nouvelle version, changez le numéro ci-dessous. */
-const CACHE = 'ma-cave-v1.1.0';
+const CACHE = 'ma-cave-v1.1.1';
 const FICHIERS = ['./', 'index.html', 'style.css', 'app.js', 'sync.js', 'manifest.webmanifest',
   'icons/icon-192.png', 'icons/icon-512.png', 'icons/maskable-512.png', 'vendor/xlsx.full.min.js'];
 
